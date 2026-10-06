@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tizimli — Dars jadvali</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#05080F;-webkit-font-smoothing:antialiased}
+.screen{
+  --bg:#0A0F1A;--surface:#101826;--surface-2:#141E2F;--hover:#1A2639;
+  --border:#1E293B;--border-2:#2A3850;--grid:#172133;--grid-half:#131C2B;
+  --text:#E8EEF7;--text-2:#A5B3C8;--text-3:#6B7B93;
+  --primary:#22B8CF;--primary-2:#0EA5B7;--primary-soft:rgba(34,184,207,.14);--on-primary:#04252B;
+  --danger:#F87171;--danger-soft:rgba(248,113,113,.14);
+  --success:#34D399;--success-soft:rgba(52,211,153,.14);
+  --warning:#FBBF24;--warning-soft:rgba(251,191,36,.14);
+  --violet:#A78BFA;--violet-soft:rgba(167,139,250,.14);
+  --blue:#60A5FA;--blue-soft:rgba(96,165,250,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+  --now:#F43F5E;
+  width:1440px;display:flex;background:var(--bg);color:var(--text);font-size:14px;line-height:1.4;overflow:hidden;
+}
+.screen.light{
+  --bg:#F3F5F9;--surface:#FFFFFF;--surface-2:#F7F9FC;--hover:#EEF2F7;
+  --border:#E3E8EF;--border-2:#D3DBE6;--grid:#E9EDF3;--grid-half:#F1F4F8;
+  --text:#0F172A;--text-2:#475569;--text-3:#8391A7;
+  --primary:#0EA5B7;--primary-2:#0891A1;--primary-soft:rgba(14,165,183,.10);--on-primary:#FFFFFF;
+  --danger:#E11D48;--danger-soft:rgba(225,29,72,.08);
+  --success:#059669;--success-soft:rgba(5,150,105,.09);
+  --warning:#D97706;--warning-soft:rgba(217,119,6,.10);
+  --violet:#7C3AED;--violet-soft:rgba(124,58,237,.08);
+  --blue:#2563EB;--blue-soft:rgba(37,99,235,.08);
+  --shadow:0 1px 2px rgba(15,23,42,.06);
+}
+.ic{flex:none;display:block}
+
+/* ---------- sidebar */
+.side{width:256px;flex:none;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:16px 12px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 16px}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#22B8CF,#0E7C8C);display:flex;align-items:center;justify-content:center;color:#fff}
+.brand-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.brand-tag{font-size:10.5px;font-weight:600;color:var(--primary);background:var(--primary-soft);padding:2px 6px;border-radius:6px;margin-left:2px}
+.brand .collapse{margin-left:auto;color:var(--text-3)}
+.branch{display:flex;align-items:center;gap:10px;border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:9px 10px;margin-bottom:18px}
+.branch-av{width:30px;height:30px;border-radius:8px;background:var(--violet-soft);color:var(--violet);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.branch-t{font-size:13px;font-weight:600}
+.branch-s{font-size:11.5px;color:var(--text-3)}
+.branch .ic{margin-left:auto;color:var(--text-3)}
+.nav-group{margin-bottom:14px}
+.nav-label{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);padding:0 10px 6px}
+.nav-item{display:flex;align-items:center;gap:11px;height:36px;padding:0 10px;border-radius:9px;color:var(--text-2);font-size:13.5px;font-weight:500}
+.nav-item .ic{color:var(--text-3)}
+.nav-item.active{background:var(--primary-soft);color:var(--primary);font-weight:600}
+.nav-item.active .ic{color:var(--primary)}
+.nav-badge{margin-left:auto;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--hover);color:var(--text-2)}
+.nav-badge.hot{background:var(--danger-soft);color:var(--danger)}
+.side-foot{margin-top:auto}
+.ai-card{border-radius:14px;padding:14px;background:linear-gradient(140deg,rgba(34,184,207,.16),rgba(124,58,237,.14));border:1px solid var(--border);margin-bottom:10px}
+.ai-head{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.ai-ico{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#22B8CF,#7C3AED);color:#fff;display:flex;align-items:center;justify-content:center}
+.ai-text{font-size:12px;color:var(--text-2);margin:8px 0 12px;line-height:1.45}
+.ai-btn{height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--border-2);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--text)}
+.help{display:flex;align-items:center;gap:10px;padding:8px 10px;font-size:12.5px;color:var(--text-3);font-weight:500}
+
+/* ---------- main */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{height:64px;display:flex;align-items:center;gap:12px;padding:0 28px;border-bottom:1px solid var(--border);background:var(--surface)}
+.crumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-3)}
+.crumb b{color:var(--text);font-weight:600}
+.search{white-space:nowrap;margin-left:auto;width:340px;height:38px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;gap:9px;padding:0 10px 0 12px;color:var(--text-3);font-size:13px}
+.kbd{margin-left:auto;font-size:11px;font-weight:600;color:var(--text-3);border:1px solid var(--border-2);border-radius:6px;padding:1px 6px;background:var(--surface)}
+.ibtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text-2);position:relative;flex:none}
+.ibtn.ai{background:linear-gradient(135deg,#22B8CF,#7C3AED);border:none;color:#fff}
+.badge{position:absolute;top:-6px;right:-8px;background:#F43F5E;color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:999px;border:2px solid var(--surface)}
+.lang{height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 10px;font-size:13px;font-weight:600;color:var(--text-2)}
+.vsep{width:1px;height:24px;background:var(--border)}
+.me{display:flex;align-items:center;gap:10px}
+.me-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#22B8CF,#2563EB);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.me-n{font-size:13px;font-weight:600}
+.me-r{font-size:11.5px;color:var(--text-3)}
+
+.content{padding:24px 28px 28px;display:flex;flex-direction:column;gap:20px}
+.ph{display:flex;align-items:flex-end;gap:12px}
+.ph h1{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.ph-sub{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3);margin-top:4px}
+.ph-sub .sep{width:3px;height:3px;border-radius:50%;background:var(--text-3)}
+.ph-sub b{color:var(--text-2);font-weight:600}
+.ph-act{margin-left:auto;display:flex;gap:10px}
+.btn{height:38px;border-radius:10px;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.btn .ic{color:var(--text-2)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.btn.primary .ic{color:var(--on-primary)}
+
+/* ---------- KPI */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.kpi{padding:16px 18px;border-left:1px solid var(--border)}
+.kpi:first-child{border-left:none}
+.kpi-l{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-2);font-weight:500}
+.kpi-i{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.kpi-v{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+.kpi-n{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.chip{display:inline-flex;align-items:center;gap:2px;font-size:11.5px;font-weight:600;padding:1px 6px 1px 4px;border-radius:6px}
+.chip.up{color:var(--success);background:var(--success-soft)}
+.chip.down{color:var(--danger);background:var(--danger-soft)}
+.kpi-s{font-size:11.5px;color:var(--text-3);margin-top:3px}
+.t-primary{color:var(--primary);background:var(--primary-soft)}
+.t-success{color:var(--success);background:var(--success-soft)}
+.t-warning{color:var(--warning);background:var(--warning-soft)}
+.t-violet{color:var(--violet);background:var(--violet-soft)}
+.t-danger{color:var(--danger);background:var(--danger-soft)}
+.t-blue{color:var(--blue);background:var(--blue-soft)}
+.kpi.alert .kpi-n{color:var(--danger)}
+
+/* ---------- schedule card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.tb{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.navbtns{display:flex;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.navbtns div{width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--text-2)}
+.navbtns div+div{border-left:1px solid var(--border)}
+.today{height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;font-size:13px;font-weight:600}
+.range{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-left:4px}
+.days{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);margin-left:auto}
+.day{width:46px;height:44px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;position:relative}
+.day-d{font-size:11px;font-weight:500;color:var(--text-3)}
+.day-n{font-size:14px;font-weight:700;color:var(--text-2)}
+.day.on{background:var(--primary);box-shadow:0 4px 12px rgba(34,184,207,.28)}
+.day.on .day-d{color:var(--on-primary);opacity:.8}
+.day.on .day-n{color:var(--on-primary)}
+.day.off .day-n,.day.off .day-d{opacity:.5}
+.day-dot{position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--primary)}
+.day.on .day-dot{background:var(--on-primary)}
+.seg{display:flex;padding:3px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border)}
+.seg div{height:30px;padding:0 11px;border-radius:7px;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--text-3)}
+.seg .on{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.25);border:1px solid var(--border)}
+.light .seg .on{box-shadow:0 1px 2px rgba(15,23,42,.08)}
+.tb-r{display:flex;align-items:center;gap:10px;margin-left:auto}
+
+.fb{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border)}
+.fchip{height:30px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 10px;font-size:12.5px;color:var(--text-2);font-weight:500}
+.fchip b{color:var(--text);font-weight:600}
+.fchip.dashed{border-style:dashed;color:var(--text-3)}
+.legend{margin-left:auto;display:flex;align-items:center;gap:14px;font-size:12px;color:var(--text-2)}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:3px}
+
+/* ---------- grid */
+.gh{display:flex;border-bottom:1px solid var(--border);background:var(--surface-2)}
+.gcorner{width:68px;flex:none;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-size:10.5px;font-weight:600;color:var(--text-3)}
+.room{flex:1;padding:10px 12px;border-left:1px solid var(--border)}
+.room-t{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700}
+.room-p{font-size:11px;font-weight:600;color:var(--text-3)}
+.room-s{font-size:11px;color:var(--text-3);margin-top:1px}
+.bar{height:4px;border-radius:99px;background:var(--border);margin-top:7px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--primary)}
+.gb{display:flex;position:relative}
+.gtimes{width:68px;flex:none;position:relative}
+.gt{position:absolute;right:10px;font-size:11px;font-weight:500;color:var(--text-3);transform:translateY(-50%)}
+.gcol{flex:1;position:relative;border-left:1px solid var(--border)}
+.hl{position:absolute;left:0;right:0;border-top:1px solid var(--grid)}
+.hh{position:absolute;left:0;right:0;border-top:1px dashed var(--grid-half)}
+.ev{position:absolute;left:5px;right:5px;border-radius:9px;background:var(--c-bg);border:1px solid var(--c-bd);padding:7px 9px 7px 11px;overflow:hidden}
+.ev-bar{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.ev-time{white-space:nowrap;display:flex;align-items:center;justify-content:space-between;font-size:10.5px;font-weight:600;color:var(--text-3);letter-spacing:.01em}
+.ev-title{font-size:12.5px;font-weight:700;color:var(--c-tx);margin-top:2px;line-height:1.3;letter-spacing:-.005em}
+.ev-who{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:11.5px;color:var(--text-2);font-weight:500;white-space:nowrap}
+.ev-av{width:18px;height:18px;border-radius:50%;background:var(--c-tag);color:var(--c-tx);font-size:8.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.ev-foot{position:absolute;left:11px;right:9px;bottom:7px;display:flex;align-items:center;justify-content:space-between}
+.ev-tag{white-space:nowrap;font-size:10px;font-weight:700;color:var(--c-tx);background:var(--c-tag);padding:2px 6px;border-radius:5px;letter-spacing:.02em}
+.ev-cnt{white-space:nowrap;display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--text-2)}
+.ev-cnt.full{color:var(--danger)}
+.ev.past{opacity:.5}
+.ev.live{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 6px 18px -6px var(--c)}
+.live-pill{display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:var(--c-tx);text-transform:uppercase;letter-spacing:.05em}
+.live-pill i{width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px var(--c-tag)}
+.slot{position:absolute;left:5px;right:5px;border-radius:9px;border:1.5px dashed var(--border-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-3);font-size:12px;font-weight:600;background:var(--surface-2)}
+.slot .plus{width:26px;height:26px;border-radius:8px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center}
+.slot small{font-size:10.5px;font-weight:500}
+.now{position:absolute;left:62px;right:0;height:0;border-top:2px solid var(--now);z-index:5}
+.now-dot{position:absolute;left:-4px;top:-6px;width:10px;height:10px;border-radius:50%;background:var(--now)}
+.now-t{position:absolute;left:8px;width:50px;transform:translateY(-50%);z-index:6;background:var(--now);color:#fff;font-size:10.5px;font-weight:700;text-align:center;border-radius:6px;padding:2px 0}
+
+/* repo-only */
+.theme-btn{cursor:pointer}
+.screen:not(.light) .t-moon,.screen.light .t-sun{display:none}
+
+.ev.aniq{--c:rgb(34,197,94);--c-bg:rgba(34,197,94,0.14);--c-bd:rgba(34,197,94,0.3);--c-tag:rgba(34,197,94,0.2);--c-tx:rgb(111,217,150);}.light .ev.aniq{--c-bg:rgba(34,197,94,0.09);--c-bd:rgba(34,197,94,0.28);--c-tag:rgba(34,197,94,0.14);--c-tx:rgb(20,114,55);}.dot.aniq{background:rgb(34,197,94);}
+.ev.til{--c:rgb(245,158,11);--c-bg:rgba(245,158,11,0.14);--c-bd:rgba(245,158,11,0.3);--c-tag:rgba(245,158,11,0.2);--c-tx:rgb(248,192,96);}.light .ev.til{--c-bg:rgba(245,158,11,0.09);--c-bd:rgba(245,158,11,0.28);--c-tag:rgba(245,158,11,0.14);--c-tx:rgb(142,92,6);}.dot.til{background:rgb(245,158,11);}
+.ev.it{--c:rgb(59,130,246);--c-bg:rgba(59,130,246,0.14);--c-bd:rgba(59,130,246,0.3);--c-tag:rgba(59,130,246,0.2);--c-tx:rgb(128,174,249);}.light .ev.it{--c-bg:rgba(59,130,246,0.09);--c-bd:rgba(59,130,246,0.28);--c-tag:rgba(59,130,246,0.14);--c-tx:rgb(34,75,143);}.dot.it{background:rgb(59,130,246);}
+.ev.tabiiy{--c:rgb(168,85,247);--c-bg:rgba(168,85,247,0.14);--c-bd:rgba(168,85,247,0.3);--c-tag:rgba(168,85,247,0.2);--c-tx:rgb(198,144,250);}.light .ev.tabiiy{--c-bg:rgba(168,85,247,0.09);--c-bd:rgba(168,85,247,0.28);--c-tag:rgba(168,85,247,0.14);--c-tx:rgb(97,49,143);}.dot.tabiiy{background:rgb(168,85,247);}
+.ev.kids{--c:rgb(236,72,153);--c-bg:rgba(236,72,153,0.14);--c-bd:rgba(236,72,153,0.3);--c-tag:rgba(236,72,153,0.2);--c-tx:rgb(243,136,189);}.light .ev.kids{--c-bg:rgba(236,72,153,0.09);--c-bd:rgba(236,72,153,0.28);--c-tag:rgba(236,72,153,0.14);--c-tx:rgb(137,42,89);}.dot.kids{background:rgb(236,72,153);}
+body{display:flex;justify-content:center;min-width:1440px}</style>
+</head>
+<body>
+
+<div class="screen" data-name="Dars jadvali — Dark">
+  
+<aside class="side">
+  <div class="brand">
+    <div class="logo"><svg class="ic" data-icon="cap" data-sw="2" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+    <span class="brand-name">Tizimli</span><span class="brand-tag">CRM · LMS</span>
+    <span class="collapse"><svg class="ic" data-icon="panel" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></span>
+  </div>
+  <div class="branch">
+    <div class="branch-av">A1</div>
+    <div><div class="branch-t">Akademiya 1</div><div class="branch-s">Chortoq filiali</div></div>
+    <svg class="ic" data-icon="updown" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"/></svg>
+  </div>
+  <div class="nav-group"><div class="nav-label">Asosiy</div><div class="nav-item active"><svg class="ic" data-icon="calendar" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Dars jadvali</span></div><div class="nav-item"><svg class="ic" data-icon="tasks" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Topshiriqlar</span><span class="nav-badge ">12</span></div><div class="nav-item"><svg class="ic" data-icon="megaphone" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span>Lidlar</span><span class="nav-badge hot">246</span></div></div><div class="nav-group"><div class="nav-label">O'quv jarayoni</div><div class="nav-item"><svg class="ic" data-icon="layers" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg><span>Guruhlar</span></div><div class="nav-item"><svg class="ic" data-icon="users" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>O'quvchilar</span></div><div class="nav-item"><svg class="ic" data-icon="book" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>O'quv bo'limi</span></div><div class="nav-item"><svg class="ic" data-icon="exam" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><span>Imtihonlar</span></div><div class="nav-item"><svg class="ic" data-icon="trophy" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span>Gamifikatsiya</span></div><div class="nav-item"><svg class="ic" data-icon="eye" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>Nazorat</span></div></div><div class="nav-group"><div class="nav-label">Biznes</div><div class="nav-item"><svg class="ic" data-icon="wallet" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg><span>Moliya</span></div><div class="nav-item"><svg class="ic" data-icon="trend" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span>Sotuv va marketing</span></div><div class="nav-item"><svg class="ic" data-icon="chart" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg><span>Hisobotlar</span></div></div><div class="nav-group"><div class="nav-label">Tizim</div><div class="nav-item"><svg class="ic" data-icon="shield" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg><span>Boshqaruv</span></div><div class="nav-item"><svg class="ic" data-icon="sliders" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg><span>Sozlamalar</span></div></div>
+  <div class="side-foot">
+    <div class="ai-card">
+      <div class="ai-head"><span class="ai-ico"><svg class="ic" data-icon="sparkles" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></span>Tizimli AI</div>
+      <div class="ai-text">Bo'sh xonalar, o'qituvchi bandligi va qarzdorlar haqida so'rang.</div>
+      <div class="ai-btn"><svg class="ic" data-icon="sparkles" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg>Savol berish</div>
+    </div>
+    <div class="help"><svg class="ic" data-icon="help" data-sw="1.75" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></svg>Texnik yordam</div>
+  </div>
+</aside>
+  <main class="main">
+    
+<header class="top">
+  <div class="crumb">O'quv jarayoni <svg class="ic" data-icon="right" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> <b>Dars jadvali</b></div>
+  <div class="search"><svg class="ic" data-icon="search" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Qidirish: o'quvchi, guruh, ustoz…</span><span class="kbd">Ctrl K</span></div>
+  <div class="ibtn ai"><svg class="ic" data-icon="sparkles" data-sw="2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></div>
+  <div class="ibtn"><svg class="ic" data-icon="plus" data-sw="2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div>
+  <div class="ibtn"><svg class="ic" data-icon="bell" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge">99+</span></div>
+  <div class="lang"><svg class="ic" data-icon="globe" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>UZ<svg class="ic" data-icon="down" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+  <div class="ibtn theme-btn" data-theme-toggle title="Mavzuni almashtirish"><span class="t-sun"><svg class="ic" data-icon="sun" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span><span class="t-moon"><svg class="ic" data-icon="moon" data-sw="1.75" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span></div>
+  <div class="vsep"></div>
+  <div class="me"><div class="me-av">AR</div><div><div class="me-n">Abdullo R.</div><div class="me-r">Administrator</div></div></div>
+</header>
+    <div class="content">
+      
+<div class="ph">
+  <div>
+    <h1>Dars jadvali</h1>
+    <div class="ph-sub">Seshanba, 6-oktabr <span class="sep"></span> <b>16</b> ta dars <span class="sep"></span> <b>8</b> ta xona <span class="sep"></span> <b>184</b> o'quvchi</div>
+  </div>
+  <div class="ph-act">
+    <div class="btn"><svg class="ic" data-icon="download" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg>Export</div>
+    <div class="btn"><svg class="ic" data-icon="chart" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>Statistika</div>
+    <div class="btn primary"><svg class="ic" data-icon="plus" data-sw="2.2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Dars qo'shish</div>
+  </div>
+</div>
+      <div class="kpis"><div class="kpi "><div class="kpi-l"><span class="kpi-i t-primary"><svg class="ic" data-icon="users" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Aktiv o'quvchilar</div><div class="kpi-v"><span class="kpi-n">4 767</span><span class="chip up"><svg class="ic" data-icon="up" data-sw="2.4" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7M12 19V5"/></svg>3,2%</span></div><div class="kpi-s">o'tgan oyga nisbatan</div></div><div class="kpi "><div class="kpi-l"><span class="kpi-i t-success"><svg class="ic" data-icon="userplus" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Yangi o'quvchilar</div><div class="kpi-v"><span class="kpi-n">175</span><span class="chip up"><svg class="ic" data-icon="up" data-sw="2.4" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7M12 19V5"/></svg>12</span></div><div class="kpi-s">shu hafta</div></div><div class="kpi "><div class="kpi-l"><span class="kpi-i t-warning"><svg class="ic" data-icon="inbox" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span>Buyurtmalar</div><div class="kpi-v"><span class="kpi-n">246</span></div><div class="kpi-s">168 tasi sinov darsida</div></div><div class="kpi "><div class="kpi-l"><span class="kpi-i t-violet"><svg class="ic" data-icon="layers" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></span>Guruhlar</div><div class="kpi-v"><span class="kpi-n">38</span><span class="chip up"><svg class="ic" data-icon="up" data-sw="2.4" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7M12 19V5"/></svg>2</span></div><div class="kpi-s">214 ta bo'sh o'rin</div></div><div class="kpi alert"><div class="kpi-l"><span class="kpi-i t-danger"><svg class="ic" data-icon="alert" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>Qarzdorlar</div><div class="kpi-v"><span class="kpi-n">130</span><span class="chip up"><svg class="ic" data-icon="dn" data-sw="2.4" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>6</span></div><div class="kpi-s">18,4 mln so'm kutilmoqda</div></div><div class="kpi "><div class="kpi-l"><span class="kpi-i t-blue"><svg class="ic" data-icon="userx" data-sw="2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m17 8 5 5M22 8l-5 5"/></svg></span>Ketganlar (oy)</div><div class="kpi-v"><span class="kpi-n">35</span><span class="chip up"><svg class="ic" data-icon="dn" data-sw="2.4" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>8%</span></div><div class="kpi-s">kamaydi — yaxshi natija</div></div></div>
+      <section class="card">
+        
+<div class="tb">
+  <div class="navbtns"><div><svg class="ic" data-icon="left" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></div><div><svg class="ic" data-icon="right" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div></div>
+  <div class="today">Bugun</div>
+  <div class="range">5 – 11 oktabr, 2026</div>
+  <div class="days"><div class="day"><span class="day-d">Du</span><span class="day-n">5</span></div><div class="day on"><span class="day-d">Se</span><span class="day-n">6</span></div><div class="day"><span class="day-d">Ch</span><span class="day-n">7</span></div><div class="day"><span class="day-d">Pa</span><span class="day-n">8</span></div><div class="day"><span class="day-d">Ju</span><span class="day-n">9</span></div><div class="day"><span class="day-d">Sh</span><span class="day-n">10</span></div><div class="day off"><span class="day-d">Ya</span><span class="day-n">11</span></div></div>
+  <div class="tb-r">
+    <div class="seg"><div class="on"><svg class="ic" data-icon="grid" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Xonalar</div><div><svg class="ic" data-icon="user" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>O'qituvchilar</div></div>
+    <div class="seg"><div class="on">Kun</div><div>Hafta</div></div>
+    <div class="ibtn"><svg class="ic" data-icon="expand" data-sw="1.75" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
+  </div>
+</div>
+<div class="fb">
+  <div class="fchip">Fan: <b>Barchasi</b><svg class="ic" data-icon="down" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+  <div class="fchip">O'qituvchi: <b>Barchasi</b><svg class="ic" data-icon="down" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+  <div class="fchip">Kunlar: <b>Juft</b><svg class="ic" data-icon="down" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+  <div class="fchip">Xonalar: <b>8 / 10</b><svg class="ic" data-icon="down" data-sw="1.75" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+  <div class="fchip dashed"><svg class="ic" data-icon="filter" data-sw="1.75" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>Filtr qo'shish</div>
+  <div class="legend"><span><i class="dot aniq"></i>Aniq fanlar</span><span><i class="dot til"></i>Tillar</span><span><i class="dot it"></i>IT</span><span><i class="dot tabiiy"></i>Tabiiy fanlar</span><span><i class="dot kids"></i>Bolalar uchun</span></div>
+</div>
+        <div class="gh"><div class="gcorner">GMT+5</div><div class="room"><div class="room-t">210-xona<span class="room-p">64%</span></div><div class="room-s">12 o'rin</div><div class="bar"><i style="width:64%"></i></div></div><div class="room"><div class="room-t">211-xona<span class="room-p">43%</span></div><div class="room-s">14 o'rin</div><div class="bar"><i style="width:43%"></i></div></div><div class="room"><div class="room-t">212-xona<span class="room-p">50%</span></div><div class="room-s">16 o'rin</div><div class="bar"><i style="width:50%"></i></div></div><div class="room"><div class="room-t">213-xona<span class="room-p">50%</span></div><div class="room-s">16 o'rin</div><div class="bar"><i style="width:50%"></i></div></div><div class="room"><div class="room-t">214-xona<span class="room-p">43%</span></div><div class="room-s">14 o'rin</div><div class="bar"><i style="width:43%"></i></div></div><div class="room"><div class="room-t">216-xona<span class="room-p">50%</span></div><div class="room-s">16 o'rin</div><div class="bar"><i style="width:50%"></i></div></div><div class="room"><div class="room-t">217-xona<span class="room-p">29%</span></div><div class="room-s">16 o'rin</div><div class="bar"><i style="width:29%"></i></div></div><div class="room"><div class="room-t">218-xona<span class="room-p">43%</span></div><div class="room-s">14 o'rin</div><div class="bar"><i style="width:43%"></i></div></div></div><div class="gb"><div class="gtimes" style="height:560px"><div class="gt" style="top:12px">08:00</div><div class="gt" style="top:80px">09:00</div><div class="gt" style="top:160px">10:00</div><div class="gt" style="top:240px">11:00</div><div class="gt" style="top:320px">12:00</div><div class="gt" style="top:400px">13:00</div><div class="gt" style="top:480px">14:00</div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev tabiiy past" style="top:3px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>08:00 – 09:30</span></div><div class="ev-title">Kimyo</div><div class="ev-who"><span class="ev-av">SA</span>S. Aliyev</div><div class="ev-foot"><span class="ev-tag">KIM-04</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>9/12</span></div></div><div class="ev tabiiy " style="top:163px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>10:00 – 11:30</span></div><div class="ev-title">Biologiya</div><div class="ev-who"><span class="ev-av">MQ</span>M. Qodirova</div><div class="ev-foot"><span class="ev-tag">BIO-DTM</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>11/12</span></div></div><div class="ev til " style="top:403px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>13:00 – 14:30</span></div><div class="ev-title">General English B1</div><div class="ev-who"><span class="ev-av">DK</span>D. Karimova</div><div class="ev-foot"><span class="ev-tag">ENG-B1</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>12/14</span></div></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev til live" style="top:43px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>08:30 – 10:00</span><span class="live-pill" title="Jarayonda"><i></i></span></div><div class="ev-title">Ingliz tili A1</div><div class="ev-who"><span class="ev-av">MY</span>M. Yusupova</div><div class="ev-foot"><span class="ev-tag">ENG-A1</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>10/12</span></div></div><div class="ev til " style="top:323px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>12:00 – 13:30</span></div><div class="ev-title">Ona tili</div><div class="ev-who"><span class="ev-av">GS</span>G. Saidova</div><div class="ev-foot"><span class="ev-tag">ONA-11</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>13/14</span></div></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev tabiiy live" style="top:83px;height:154px"><i class="ev-bar"></i><div class="ev-time"><span>09:00 – 11:00</span><span class="live-pill" title="Jarayonda"><i></i></span></div><div class="ev-title">Fizika</div><div class="ev-who"><span class="ev-av">UR</span>U. Rahimov</div><div class="ev-foot"><span class="ev-tag">FIZ-DTM</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>14/16</span></div></div><div class="ev it " style="top:363px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>12:30 – 14:00</span></div><div class="ev-title">Robototexnika</div><div class="ev-who"><span class="ev-av">BN</span>B. Nazarov</div><div class="ev-foot"><span class="ev-tag">ROBO-K2</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>8/10</span></div></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev aniq " style="top:203px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>10:30 – 12:00</span></div><div class="ev-title">Algebra</div><div class="ev-who"><span class="ev-av">BE</span>B. Ergashev</div><div class="ev-foot"><span class="ev-tag">DTM-1</span><span class="ev-cnt full"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>16/16</span></div></div><div class="ev aniq " style="top:403px;height:154px"><i class="ev-bar"></i><div class="ev-time"><span>13:00 – 15:00</span></div><div class="ev-title">Matematika</div><div class="ev-who"><span class="ev-av">AM</span>A. Mahmudov</div><div class="ev-foot"><span class="ev-tag">MATH-9</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>12/16</span></div></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev kids past" style="top:3px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>08:00 – 09:30</span></div><div class="ev-title">Mental arifmetika</div><div class="ev-who"><span class="ev-av">ST</span>Sh. Tursunova</div><div class="ev-foot"><span class="ev-tag">MENT-K1</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>8/10</span></div></div><div class="ev til " style="top:243px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>11:00 – 12:30</span></div><div class="ev-title">Rus tili B1</div><div class="ev-who"><span class="ev-av">NR</span>N. Rasulova</div><div class="ev-foot"><span class="ev-tag">RUS-B1</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>10/14</span></div></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev aniq live" style="top:3px;height:154px"><i class="ev-bar"></i><div class="ev-time"><span>08:00 – 10:00</span><span class="live-pill" title="Jarayonda"><i></i></span></div><div class="ev-title">Matematika</div><div class="ev-who"><span class="ev-av">AM</span>A. Mahmudov</div><div class="ev-foot"><span class="ev-tag">MATH-12</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>14/16</span></div></div><div class="ev kids " style="top:243px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>11:00 – 12:30</span></div><div class="ev-title">Kids English</div><div class="ev-who"><span class="ev-av">LA</span>L. Abdullayeva</div><div class="ev-foot"><span class="ev-tag">KIDS-3</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>9/12</span></div></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev it " style="top:163px;height:154px"><i class="ev-bar"></i><div class="ev-time"><span>10:00 – 12:00</span></div><div class="ev-title">Python dasturlash</div><div class="ev-who"><span class="ev-av">JT</span>J. Toshmatov</div><div class="ev-foot"><span class="ev-tag">PY-07</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>15/16</span></div></div><div class="slot" style="top:403px;height:114px"><span class="plus"><svg class="ic" data-icon="plus" data-sw="2.2" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span>Dars qo'shish<small>13:00 – 14:30 bo'sh</small></div></div><div class="gcol" style="height:560px"><div class="hh" style="top:40px"></div><div class="hl" style="top:80px"></div><div class="hh" style="top:120px"></div><div class="hl" style="top:160px"></div><div class="hh" style="top:200px"></div><div class="hl" style="top:240px"></div><div class="hh" style="top:280px"></div><div class="hl" style="top:320px"></div><div class="hh" style="top:360px"></div><div class="hl" style="top:400px"></div><div class="hh" style="top:440px"></div><div class="hl" style="top:480px"></div><div class="hh" style="top:520px"></div><div class="ev til live" style="top:83px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>09:00 – 10:30</span><span class="live-pill" title="Jarayonda"><i></i></span></div><div class="ev-title">IELTS Intensive</div><div class="ev-who"><span class="ev-av">DK</span>D. Karimova</div><div class="ev-foot"><span class="ev-tag">IELTS-7</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>12/14</span></div></div><div class="ev it " style="top:443px;height:114px"><i class="ev-bar"></i><div class="ev-time"><span>13:30 – 15:00</span></div><div class="ev-title">Frontend</div><div class="ev-who"><span class="ev-av">SX</span>S. Xolmatov</div><div class="ev-foot"><span class="ev-tag">WEB-03</span><span class="ev-cnt"><svg class="ic" data-icon="users" data-sw="2" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>11/14</span></div></div></div><div class="now" style="top:133px"><i class="now-dot"></i></div><div class="now-t" style="top:133px">09:40</div></div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var s = btn.closest('.screen');
+    s.classList.toggle('light');
+    document.body.style.background = s.classList.contains('light') ? '#E9EDF3' : '#05080F';
+  });
+});
+</script>
+</body>
+</html>
